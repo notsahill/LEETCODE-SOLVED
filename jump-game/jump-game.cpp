@@ -1,19 +1,13 @@
 class Solution {
 public:
-    bool helper(vector<int> &nums,int idx,vector<int> &dp)
-    {
-        if(idx==nums.size()-1) return true;
-        if(nums[idx]==0) return false;
-        if(dp[idx]!=-1) return dp[idx];
-        for(int i=1;i<=nums[idx];i++)
-        {
-            if(i<nums.size() and helper(nums,idx+i,dp)) return dp[idx]=true;
+    bool canJump(vector<int>& arr) {
+        int end=0,maxi=0,n=arr.size();
+        for(int i=0;i<n;i++){
+            maxi=max(maxi,i+arr[i]);
+            if(i==end){
+                end=maxi;
+            }
         }
-        return dp[idx]=false;
-    }
-    bool canJump(vector<int>& nums) 
-    {
-        vector<int> dp(nums.size(),-1);
-        return helper(nums,0,dp);
+        return end>=n-1;
     }
 };
