@@ -15,15 +15,11 @@ public:
         {
             suff[i]= suff[i+1]|nums[i];
         }
-        // for(auto a:pref) cout<<a<<" ";
-        // cout<<endl;
-        // for(auto a:suff) cout<<a<<" ";
         long long mx=INT_MIN;
         for(int i=0;i<n;i++)
         {
             long long x=nums[i];
-            long long OR=0;
-            OR=OR|x<<k;
+            long long OR=x<<k;
             if(i-1>=0) OR=OR|pref[i-1];
             if(i+1<n) OR=OR|suff[i+1];
             mx=max(mx,OR);
