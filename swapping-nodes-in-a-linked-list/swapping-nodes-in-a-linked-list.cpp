@@ -10,21 +10,20 @@
  */
 class Solution {
 public:
-   
     ListNode* swapNodes(ListNode* head, int k) 
     {
         int c=1;
-        ListNode* l=head;
-        ListNode* r=head;
-        ListNode* curr=head;
+        ListNode* curr=head; 
+        ListNode* left=head; 
+        ListNode* right=head;
         while(curr!=NULL)
         {
-            if(c<k) l=l->next;
-            if(c>k) r=r->next;
+            if(c<k) left=left->next;
+            if(c>k) right=right->next;
             curr=curr->next;
             c++;
-        }
-        swap(l->val,r->val);
-        return head;
+        } 
+        swap(left->val,right->val);
+        return head;   
     }
 };
