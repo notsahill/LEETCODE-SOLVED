@@ -7,9 +7,9 @@ public:
         if(idx+nums[idx]>=n-1) return 1;
         if(dp[idx]!=-1) return dp[idx];
         long long ans=INT_MAX;
-        for(int i=idx+1;i<=idx+nums[idx];i++)
+        for(int i=1;i<=nums[idx];i++)
         {
-            ans=min(ans,1+helper(nums,i,dp));
+            ans=min(ans,1+helper(nums,idx+i,dp));
         }
         return dp[idx]=(ans);
 
