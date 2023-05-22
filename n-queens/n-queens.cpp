@@ -3,7 +3,7 @@ public:
     bool isSafe(int i,int j,vector<string> &board,int n)
     {
         int oi=i,oj=j;
-        while(i>=0 and j >=0)
+        while(i>=0 and j>=0)
         {
             if(board[i--][j--]=='Q') return false;
         }
