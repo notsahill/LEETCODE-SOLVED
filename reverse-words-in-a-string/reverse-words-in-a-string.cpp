@@ -1,48 +1,29 @@
 class Solution {
 public:
-    string reverseWords(string st) 
+    void add(string &ans,string &s,int i,int j)
     {
-        stack<string> s;
-        string temp="",str="";
-        int i=0;
-        while(st[i]==' ') i++;
-        while(st[st.size()-1]==' ') st.pop_back();
-        for(int idx=i;idx<st.size();idx++)
+        for(int k=i;k<j;k++)
         {
-            str+=st[idx];
+            ans+=s[k];
         }
-        cout<<str;
-        for(auto a:str)
-        {
-            if(a==' ' and temp!="") 
-            {
-                s.push(temp);
-                temp="";
-            }
-            if(a==' ') continue;
-            else
-            {
-                temp+=a;
-            }
-        }
-
-        s.push(temp);
+    }
+    string reverseWords(string s) 
+    {
+        int l=s.size()-1;
         string ans="";
-
-        while(s.size())
+        while(l>=0)
         {
-            if(s.top()==" ") 
+            while(l>=0 and s[l]==' ') l--;
+            int r=l;
+            if(l<0) break;
+            while(l>=0 and s[l]!=' ') l--;
+            if(ans.size()==0) add(ans,s,l+1,r+1);
+            else 
             {
-                s.pop();
-            }
-            else
-            {
-                ans+=s.top()+" ";
-                // cout<< s.top()<<endl;
-                s.pop();
+                ans+=" ";
+                add(ans,s,l+1,r+1);
             }
         }
-        ans.pop_back();
         return ans;
     }
 };
