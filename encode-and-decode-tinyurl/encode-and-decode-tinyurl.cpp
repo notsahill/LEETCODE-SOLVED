@@ -8,7 +8,6 @@ public:
     {
         string s=to_string(c);
         c++;
-        en[longUrl]=s;
         en[s]=longUrl;
         return s;
     }
