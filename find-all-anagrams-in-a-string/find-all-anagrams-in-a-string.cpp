@@ -1,45 +1,35 @@
 class Solution {
 public:
+    bool allZero(vector<int> &freq)
+    {
+        for(auto a:freq)
+        {
+            if(a!=0) return false;
+        }
+        return true;
+    }
     vector<int> findAnagrams(string s, string p) 
     {
-        //brute force->optimisation
-        // vector<int> freq1(26,0),ans;
-        // for(int i=0;i<p.size();i++)
-        // {
-        //     char ch=p[i];
-        //     freq1[ch-'a']++;
-        // }
-        // int l=0,h=p.size()-1;
-        // while(h<s.size())
-        // {
-        //     vector<int> freq2(26,0);
-        //     for(int k=l;k<=h;k++)
-        //     {
-        //         char ch=s[k];
-        //         freq2[ch-'a']++;
-        //     }
-        //     if(freq1==freq2) ans.push_back(l);
-        //     l++;
-        //     h++;
-        // }
-        // return ans;
-        if(s.size()<p.size()) return {};
-        vector<int> freq1(26,0),freq2(26,0),ans;
-        for(int i=0;i<p.size();i++)
+        if(p.size()>s.size()) return {};
+        int n=s.size(),k=p.size();
+        vector<int> freq(26,0),ans;
+        for(auto a:p)
         {
-            char ch1=p[i],ch2=s[i];
-            freq1[ch1-'a']++;
-            freq2[ch2-'a']++;
+            freq[a-'a']++;
         }
-        if(freq1==freq2) ans.push_back(0);
-        int l=0,h=p.size();
-        while(h<s.size())
+        for(int i=0;i<k;i++)
         {
-            freq2[s[l]-'a']--;
-            freq2[s[h]-'a']++;
-            if(freq1==freq2) ans.push_back(l+1);
-            l++;
-            h++;
+            freq[s[i]-'a']--;
+        }
+        if(allZero(freq)) ans.push_back(0);
+        int i=0,j=k;
+        while(j<n)
+        {
+            freq[s[i]-'a']++;
+            i++;
+            freq[s[j]-'a']--;
+            if(allZero(freq)) ans.push_back(i);
+            j++;
         }
         return ans;
     }
