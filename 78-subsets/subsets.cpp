@@ -1,11 +1,11 @@
 class Solution {
 public:
-    set<vector<int>> s;
+    vector<vector<int>> ans;
     void h(int idx,vector<int>& nums,vector<int>& temp)
     {
         if(idx>=nums.size())
         {
-            s.insert(temp);
+            ans.push_back(temp);
             return;
         }
         temp.push_back(nums[idx]);
@@ -17,7 +17,6 @@ public:
     {
         vector<int> temp;
         h(0,nums,temp);
-        vector<vector<int>> ans(s.begin(),s.end());
         return ans;
     }
 };
