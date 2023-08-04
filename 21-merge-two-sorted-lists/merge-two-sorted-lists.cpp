@@ -13,44 +13,16 @@ public:
     ListNode* mergeTwoLists(ListNode* h1, ListNode* h2) {
         if(h1==NULL) return h2;
         if(h2==NULL) return h1;
-        ListNode* temp;
+        ListNode* NH;
         if(h1->val<h2->val)
         {
-            temp=h1;
-            h1=h1->next;
+            NH=h1;
+            h1->next=mergeTwoLists(h1->next,h2);
         }
         else
         {
-            temp=h2;
-            h2=h2->next;
-        }
-        ListNode* NH=temp;
-        while(h1!=NULL and h2!=NULL)
-        {
-            if(h1->val<h2->val)
-            {
-                temp->next=h1;
-                h1=h1->next;
-                temp=temp->next;
-            }
-            else
-            {
-                temp->next=h2;
-                h2=h2->next;
-                temp=temp->next;
-            }
-        }
-        while(h1!=NULL)
-        {
-            temp->next=h1;
-            h1=h1->next;
-            temp=temp->next;
-        }
-        while(h2!=NULL)
-        {
-            temp->next=h2;
-            h2=h2->next;
-            temp=temp->next;
+            NH=h2;
+            h2->next=mergeTwoLists(h1,h2->next);
         }
         return NH;
     }
