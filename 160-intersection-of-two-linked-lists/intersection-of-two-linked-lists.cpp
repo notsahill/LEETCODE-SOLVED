@@ -11,18 +11,16 @@ public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         ListNode* h1=headA;
         ListNode* h2=headB;
+        set<ListNode*> st;
         while(h1!=NULL)
         {
-            ListNode* temp=h2;
-            while(temp!=NULL)
-            {
-                if(h1==temp)
-                {
-                    return temp;
-                }
-                temp=temp->next;
-            }
+            st.insert(h1);
             h1=h1->next;
+        }
+        while(h2!=NULL)
+        {
+            if(st.count(h2)) return h2;
+            h2=h2->next;
         }
         return NULL;
     }
