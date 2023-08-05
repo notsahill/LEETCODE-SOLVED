@@ -11,34 +11,31 @@
  */
 class Solution {
 public:
-    map<pair<int,int>,vector<TreeNode*> > mp;
-    vector<TreeNode*> h(int start,int end)
+    vector<TreeNode*> h(int s,int e)
     {
         vector<TreeNode*> ans;
-        if(start>end) return {NULL};
-        if(mp.find({start,end})!=mp.end()) return mp[{start,end}];
-        if(start==end)
+        if(s>e) return {NULL};
+        if(s==e)
         {
-            TreeNode* root=new TreeNode(start);
+            TreeNode* root=new TreeNode(s);
             return {root};
         }
-        for(int i=start;i<=end;i++)
+        for(int i=s;i<=e;i++)
         {
-            vector<TreeNode*> LEFT=h(start,i-1);
-            vector<TreeNode*> RIGHT=h(i+1,end);
+            vector<TreeNode*> LEFT=h(s,i-1);
+            vector<TreeNode*> RIGHT=h(i+1,e);
             for(auto L:LEFT)
             {
                 for(auto R:RIGHT)
                 {
-                    TreeNode* root= new TreeNode(i);
+                    TreeNode* root=new TreeNode(i);
                     root->left=L;
                     root->right=R;
                     ans.push_back(root);
                 }
             }
         }
-        return mp[{start,end}]=ans;
-
+        return ans;
     }
     vector<TreeNode*> generateTrees(int n) {
         return h(1,n);
