@@ -12,7 +12,7 @@ public:
     }
     int change(int amount, vector<int>& coins) 
     {
-        sort(coins.begin(),coins.end());
+        // sort(coins.begin(),coins.end());
         vector<vector<int>> dp(coins.size(),vector<int> (amount+1,-1));
         return helper(0,amount,coins,dp);
     }
