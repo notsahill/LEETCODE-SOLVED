@@ -18,6 +18,7 @@ public:
         sort(coins.begin(),coins.end());
         int n=coins.size();
         vector<vector<int>> dp(n+1,vector<int> (amount+1,-1));
-        return f(n-1,coins,amount,dp)==INT_MAX-1? -1:f(n-1,coins,amount,dp);
+        int x=f(n-1,coins,amount,dp);
+        return x==INT_MAX-1? -1:x;
     }
 };
