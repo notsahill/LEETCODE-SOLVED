@@ -13,9 +13,20 @@ public:
         }
         return oc==ec;
     }
+    int first_element(int low,int k)
+    {
+        if(low%k==0) return low;
+        else
+        {
+            int rem=low%k;
+            low+=k-rem;
+            return low;
+        }
+        return -1;
+    }
     int numberOfBeautifulIntegers(int low, int high, int k) {
         int c=0;
-        low=((low-1)/k +1)*k;
+        low=first_element(low,k);
         while(low<=high)
         {
             if(check(low)) c++;
