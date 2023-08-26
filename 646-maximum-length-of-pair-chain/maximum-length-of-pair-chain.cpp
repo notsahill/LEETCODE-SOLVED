@@ -14,7 +14,6 @@ public:
                 mx++;
                 curr=pairs[i][1];
             }
-            // else break;
         }
         return mx;
     }
