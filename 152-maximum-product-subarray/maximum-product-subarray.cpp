@@ -2,10 +2,8 @@ class Solution {
 public:
     int maxProduct(vector<int>& nums) 
     {
-        // return h(0,nums);
         int n=nums.size(),mx=INT_MIN;
         int pref=1,suff=1;
-        // pref_prod[0]=nums[0],suff_prod[n-1]=nums[n-1];
         for(int i=0;i<n;i++)
         {
             if(pref==0) pref=1;
