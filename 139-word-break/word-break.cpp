@@ -1,26 +1,23 @@
 class Solution {
 public:
-    int dp[301];
-    int helper(int i,string s,set<string> wD)
+    int h(int idx,string &s,set<string> &dict,vector<int> &dp)
     {
-        if(i>=s.size()) return 1;
-        string temp;
-        if(dp[i]!=-1) return dp[i];
-        for(int j=i;j<s.size();j++)
+        if(idx>=s.size()) return 1;
+        string temp="";
+        if(dp[idx]!=-1) return dp[idx];
+        for(int i=idx;i<s.size();i++)
         {
-            temp+=s[j];
-            if(wD.find(temp)!=wD.end())
+            temp+=s[i];
+            if(dict.find(temp)!=dict.end())
             {
-                if(helper(j+1,s,wD)) return dp[i]=1;
+                if(h(i+1,s,dict,dp)) return dp[idx]=1;
             }
         }
-        return dp[i]=0;
+        return dp[idx]=0;
     }
-    bool wordBreak(string s, vector<string>& woD) 
-    {
-        set<string> str;
-        for(auto a:woD) str.insert(a);
-        memset(dp,-1,sizeof(dp));
-        return helper(0,s,str);    
+    bool wordBreak(string s, vector<string>& wordDict) {
+        set<string> dict(wordDict.begin(),wordDict.end());
+        vector<int> dp(s.size()+1,-1);
+        return h(0,s,dict,dp);
     }
 };
