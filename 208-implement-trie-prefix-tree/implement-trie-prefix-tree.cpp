@@ -1,9 +1,9 @@
-class Node
-{
+class Node{
     public:
     char ch;
     Node* links[26];
     bool isEnd;
+    public:
     Node(char x)
     {
         ch=x;
@@ -17,43 +17,47 @@ class Node
 class Trie {
 public:
     Node* root;
-    Trie() 
-    {
-        root=new Node('#');
+    Trie() {
+        root= new Node('$');
     }
     
-    void insert(string word) 
-    {
+    void insert(string word) {
         Node* curr=root;
         for(int i=0;i<word.size();i++)
         {
-            char ch=word[i];
-            if(curr->links[ch-'a']==NULL) curr->links[ch-'a']=new Node(ch);
-            if(i==word.size()-1) curr->links[ch-'a']->isEnd=true;
-            curr=curr->links[ch-'a'];
+            char c=word[i];
+            
+            if(curr->links[c-'a']==NULL)
+            {
+                Node* temp=new Node(c);
+                curr->links[c-'a']=temp;
+            }
+            curr=curr->links[c-'a'];
+            if(i==word.size()-1)
+            {
+                curr->isEnd=true;
+            }
         }
     }
     
-    bool search(string word) 
-    {
+    bool search(string word) {
         Node* curr=root;
         for(int i=0;i<word.size();i++)
         {
-            char ch=word[i];
-            if(curr->links[ch-'a']==NULL) return false;
-            curr=curr->links[ch-'a'];
+            char c=word[i];
+            if(curr->links[c-'a']==NULL) return false;
+            curr=curr->links[c-'a'];
         }
         return curr->isEnd;
     }
     
-    bool startsWith(string prefix) 
-    {
+    bool startsWith(string prefix) {
         Node* curr=root;
         for(int i=0;i<prefix.size();i++)
         {
-            char ch=prefix[i];
-            if(curr->links[ch-'a']==NULL) return false;
-            curr=curr->links[ch-'a'];
+            char c=prefix[i];
+            if(curr->links[c-'a']==NULL) return false;
+            curr=curr->links[c-'a'];
         }
         return true;
     }
