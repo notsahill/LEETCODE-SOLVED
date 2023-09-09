@@ -1,27 +1,26 @@
 class Solution {
 public:
     vector<vector<int>> ans;
-    void h(int idx,vector<int>& c, int target,vector<int>& temp)
+    void h(int idx,int target,vector<int>& temp,vector<int>& candidates)
     {
-        int n=c.size();
-        if(idx==n and target ==0)
+        int n=candidates.size();
+        if(idx==n)
         {
-            ans.push_back(temp);
+            if(target==0) ans.push_back(temp);
             return;
         }
-        if(idx==n) return;
-        if(c[idx]<=target)
+
+        if(candidates[idx]<=target)
         {
-            temp.push_back(c[idx]);
-            h(idx,c,target-c[idx],temp);
+            temp.push_back(candidates[idx]);
+            h(idx,target-candidates[idx],temp,candidates);
             temp.pop_back();
         }
-        h(idx+1,c,target,temp);
+        h(idx+1,target,temp,candidates);
     }
-    vector<vector<int>> combinationSum(vector<int>& c, int target) 
-    {
-        vector<int> temp;
-        h(0,c,target,temp);
-        return ans;
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+       vector<int> temp;
+       h(0,target,temp,candidates);
+       return ans; 
     }
 };
