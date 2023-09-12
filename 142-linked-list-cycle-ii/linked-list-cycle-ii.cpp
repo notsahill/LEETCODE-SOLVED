@@ -13,19 +13,20 @@ public:
         if(h==NULL or h->next==NULL) return NULL;
         ListNode* slow=h;
         ListNode* fast=h;
-        ListNode* temp=h;
+        // ListNode* temp=h;
         while(fast->next!=NULL and fast->next->next!=NULL)
         {
             slow=slow->next;
             fast=fast->next->next;
             if(slow==fast)
             {
-                while(slow!=temp)
+                fast=h;
+                while(slow!=fast)
                 {
                     slow=slow->next;
-                    temp=temp->next;
+                    fast=fast->next;
                 }
-                return temp;
+                return fast;
             }
         }
         return NULL;
