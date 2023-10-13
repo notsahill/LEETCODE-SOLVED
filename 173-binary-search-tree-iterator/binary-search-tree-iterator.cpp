@@ -11,26 +11,22 @@
  */
 class BSTIterator {
 public:
-    void inorder(TreeNode* root,vector<pair<TreeNode*,int>> &temp)
+    void inorder(TreeNode* root,vector<int> &temp)
     {
         if(!root) return ;
         if(root->left) inorder(root->left,temp);
-        temp.push_back({root,root->val});
+        temp.push_back(root->val);
         if(root->right) inorder(root->right,temp);
     }
     int c=0;
-    static bool cmp(pair<TreeNode*,int> &a,pair<TreeNode*,int> &b)
-    {
-        return a.second<b.second;
-    }
-    vector<pair<TreeNode*,int>> temp;
+    vector<int> temp;
     BSTIterator(TreeNode* root) {
         inorder(root,temp);
-        sort(temp.begin(),temp.end(),cmp);
+        sort(temp.begin(),temp.end());
     }
     
     int next() {
-        int val=temp[c].second;
+        int val=temp[c];
         c++;
         return val;
     }
