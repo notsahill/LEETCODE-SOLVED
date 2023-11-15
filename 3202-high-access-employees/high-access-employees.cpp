@@ -7,6 +7,7 @@ public:
         map<string,int> mp;
         for(int i=0;i<n-2;i++)
         {
+            if(mp.find(access_times[i][0])!=mp.end()) continue;
             if(mp.find(access_times[i][0])==mp.end() and access_times[i][0]==access_times[i+2][0])
             {
                 int t2=stoi(access_times[i+2][1]);
