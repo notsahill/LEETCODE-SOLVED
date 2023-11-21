@@ -2,35 +2,30 @@ class Solution {
 public:
     int garbageCollection(vector<string>& garbage, vector<int>& travel) {
         int n = garbage.size();
-        int lastM = -1, lastP = -1, lastG = -1;
-        
-        // Finding the last house for each type of garbage
-        for(int i = n - 1; i >= 0; i--) {
-            if(lastM == -1 && garbage[i].find("M") != string::npos)
-                lastM = i;
-            if(lastP == -1 && garbage[i].find("P") != string::npos)
-                lastP = i;
-            if(lastG == -1 && garbage[i].find("G") != string::npos)
-                lastG = i;
-
-            // To avoid unnecessaray iterations
-            if(lastM != -1 && lastP != -1 && lastG != -1)
-                break;
+        int lastM = 0, lastP = 0, lastG = 0;
+        int time=0;
+        for(int i = 0; i < n; i++) {
+           for(int j=0;j<garbage[i].size();j++)
+           {
+               if(garbage[i][j]=='M'){
+                   lastM=i;
+               }else if(garbage[i][j]=='P'){
+                   lastP=i;
+               }else{
+                   lastG=i;
+               }
+               time++;
+           }
         }
-        
-        int ans = 0;
-        // Time to pick up garbage
-        for(auto g: garbage)
-            ans += g.size();
-
-        // Time to travel
-        if(lastM != -1)
-            ans = accumulate(travel.begin(), travel.begin() + lastM, ans);
-        if(lastP != -1)
-            ans = accumulate(travel.begin(), travel.begin() + lastP, ans);
-        if(lastG != -1)
-            ans = accumulate(travel.begin(), travel.begin() + lastG, ans);
-
-        return ans;
+        vector<int> ps(n-1);
+        ps[0]=travel[0];
+        for(int i=1;i<n-1;i++)
+        {
+            ps[i]=ps[i-1]+travel[i];
+        }
+        if(lastM>0) time+=ps[lastM-1];
+        if(lastP>0)time+=ps[lastP-1];
+        if(lastG>0) time+=ps[lastG-1];
+        return time;
     }
 };
