@@ -2,12 +2,12 @@ class Solution {
 public:
     int maxLengthBetweenEqualCharacters(string s) {
         int mx=-1;
+        map<int,int> mp;
         for(int i=0;i<s.size();i++){
-            for(int j=i+1;j<s.size();j++){
-                if(s[j]==s[i]){
-                    mx=max(mx,j-i-1);
-                }
+            if(mp.find(s[i])!=mp.end()){
+                mx=max(mx,i-mp[s[i]]-1);
             }
+            else mp[s[i]]=i;
         }
         return mx;
     }
