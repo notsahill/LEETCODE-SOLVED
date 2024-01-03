@@ -1,20 +1,18 @@
 class Solution {
 public:
-    int h(int idx,int end, vector<int> &nums,vector<int> &dp)
-    {
-        if(idx>end) return 0;
-        if(dp[idx]!=-1) return dp[idx];
-        int not_pick=h(idx+1,end,nums,dp);
-        int pick=nums[idx]+h(idx+2,end,nums,dp);
-        return dp[idx]=max(pick,not_pick);
+    int h(int i,int j,vector<int> &nums,vector<int> &dp){
+        if(i>j) return 0;
+        if(dp[i]!=-1) return dp[i];
+        int pick=h(i+2,j,nums,dp)+nums[i];
+        int not_pick=h(i+1,j,nums,dp);
+        return dp[i]=max(pick,not_pick); 
     }
     int rob(vector<int>& nums) {
         int n=nums.size();
-        if(n==1) return nums[0];
-        if(n==2) return max(nums[0],nums[1]);
-        vector<int> dp1(n+1,-1),dp2(n+1,-1);
-        int a= h(0,n-2,nums,dp1);
-        int b= h(1,n-1,nums,dp2);
-        return max(a,b);
+        if(n<3) return max(nums[0],nums[n-1]);
+        vector<int> dp(n+1,-1),dp1(n+1,-1);
+        int option1=h(0,n-2,nums,dp);
+        int option2=h(1,n-1,nums,dp1);
+        return max(option1,option2);
     }
 };
