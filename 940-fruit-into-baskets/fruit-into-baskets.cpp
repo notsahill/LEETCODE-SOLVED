@@ -1,8 +1,7 @@
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
-        int mx=0;
-        int i=0,j=0,n=fruits.size();
+        int mx=0,i=0,j=0,n=fruits.size();
         map<int,int> mp;
         while(j<n){
             mp[fruits[j]]++;
