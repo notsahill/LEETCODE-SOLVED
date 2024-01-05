@@ -1,15 +1,15 @@
 class Solution {
 public:
-    int h(int idx,int prev,vector<int> &nums,vector<vector<int>> &dp)
-    {
-        if(idx>=nums.size()) return 0;
-        if(dp[idx][prev]!=-1) return dp[idx][prev];
-        int take=0,not_take=h(idx+1,prev,nums,dp);
-        if(prev==nums.size() or nums[idx]>nums[prev]) take=1+h(idx+1,idx,nums,dp);
-        return dp[idx][prev]=max(take,not_take);
+    int h(int i,int prev,vector<int> &nums,vector<vector<int>> &dp){
+        int n=nums.size();
+        if(i>=n) return 0;
+        if(dp[i][prev]!=-1) return dp[i][prev];
+        int exc=h(i+1,prev,nums,dp);
+        int inc=0;
+        if(prev==n or nums[i]>nums[prev]) inc=1+h(i+1,i,nums,dp);
+        return dp[i][prev]=max(inc,exc);
     }
-    int lengthOfLIS(vector<int>& nums) 
-    {
+    int lengthOfLIS(vector<int>& nums) {
         int n=nums.size();
         vector<vector<int>> dp(n+1,vector<int> (n+1,-1));
         return h(0,n,nums,dp);
