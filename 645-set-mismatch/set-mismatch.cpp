@@ -1,15 +1,16 @@
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
-        vector<int> ans(2);
-        map<int,int> mp;
+        int missing,repeat;
         for(int i=0;i<nums.size();i++){
-            mp[nums[i]]++;
+            if(nums[abs(nums[i])-1]<0) repeat=abs(nums[i]);
+            else nums[abs(nums[i])-1]*=-1;
         }
-        for(int i=1;i<=nums.size();i++){
-            if(mp[i]==2) ans[0]=i;
-            if(mp[i]==0) ans[1]=i;
+
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>0) missing=i+1;
         }
-        return ans;
+
+        return {repeat,missing};
     }
 };
