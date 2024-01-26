@@ -1,8 +1,8 @@
 class Solution {
 public:
-    int MOD=1e9+7;
     int dp[52][52][52];
     int h(int i,int j,int &m, int &n, int move){
+        int MOD=1e9+7;
         if((i<0 or j<0 or i>=m or j>=n) and move>=0 ) return 1;
         if(move<0) return 0;
         if(dp[i][j][move]!=-1) return dp[i][j][move];
