@@ -6,10 +6,8 @@ public:
         if(n%3!=0) return ans;
         sort(nums.begin(),nums.end());
         for(int i=0;i<n;i+=3){
-            if(nums[i+2]-nums[i+1]<=k and nums[i+1]-nums[i]<=k and nums[i+2]-nums[i]<=k){
-                ans.push_back({nums[i],nums[i+1],nums[i+2]});
-            }
-            else return {};
+            if (nums[i+2]-nums[i]>k) return {};
+            ans.push_back({nums[i],nums[i+1],nums[i+2]});
         }
         return ans;
     }
