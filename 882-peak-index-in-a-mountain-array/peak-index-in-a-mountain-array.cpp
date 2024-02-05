@@ -9,6 +9,6 @@ public:
             else if(arr[mid]>arr[mid-1]) i=mid+1;
             else j=mid;
         }
-        return i;
+        return -1;
     }
 };
