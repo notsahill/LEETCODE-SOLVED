@@ -11,21 +11,18 @@
  */
 class Solution {
 public:
-    int ans=0;
-    void h(TreeNode* root,long target)
-    {
+    long long ans=0;
+    void h(TreeNode* root,long long t){
         if(!root) return;
-        if(root->val==target) ans++;
-        h(root->left,target-root->val);
-        h(root->right,target-root->val);
+        if(root->val==t) ans++;
+        h(root->left,t-root->val);
+        h(root->right,t-root->val);
     }
-    int pathSum(TreeNode* root, int target) {
-        if(root)
-        {
-            h(root,target);
-            pathSum(root->left,target);
-            pathSum(root->right,target);
-        }
-        return ans;
+    int pathSum(TreeNode* root, int targetSum) {
+        if(!root) return 0;
+        h(root,targetSum);
+        pathSum(root->left,targetSum);
+        pathSum(root->right,targetSum);
+        return (int)ans;
     }
 };
