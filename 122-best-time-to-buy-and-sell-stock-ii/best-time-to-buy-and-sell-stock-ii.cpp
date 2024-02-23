@@ -4,11 +4,13 @@ public:
         int n=prices.size();
         if(idx>=n) return 0;
         if(dp[idx][canBuy]!=-1) return dp[idx][canBuy];
+        int ans=h(idx+1,canBuy,prices,dp);
         if(canBuy){
-            return dp[idx][canBuy]=max(-prices[idx]+h(idx+1,!canBuy,prices,dp),h(idx+1,canBuy,prices,dp));
+            ans=max(-prices[idx]+h(idx+1,!canBuy,prices,dp),ans);
         }else{
-            return dp[idx][canBuy]=max(prices[idx]+h(idx+1,!canBuy,prices,dp),h(idx+1,canBuy,prices,dp));
+            ans=max(prices[idx]+h(idx+1,!canBuy,prices,dp),ans);
         }
+        return dp[idx][canBuy]=ans;
     }
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
