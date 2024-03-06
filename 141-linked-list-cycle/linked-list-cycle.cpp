@@ -9,12 +9,11 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
+        if(!head || !head->next) return false;
         ListNode* slow=head,*fast=head;
-        if(head==NULL or head->next==NULL) return false;
-        while(fast!=NULL){
+        while(fast!=NULL && fast->next!=NULL){
             slow=slow->next;
-            fast=fast->next;
-            if(fast!=NULL) fast=fast->next;
+            fast=fast->next->next;
             if(slow==fast) return true;
         }
         return false;
