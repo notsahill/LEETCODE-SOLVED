@@ -8,7 +8,7 @@ public:
             x--;
         }
         for(int i=0;i<s.size();i++){
-            for(int j=i;j<s.size();j++){
+            for(int j=i+1;j<s.size();j++){
                 if(preference[s[j]-'a']>preference[s[i]-'a']){
                     swap(s[i],s[j]);
                 }
